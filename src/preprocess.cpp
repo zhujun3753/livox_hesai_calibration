@@ -349,14 +349,99 @@ void Preprocess::oust64_handler(const sensor_msgs::PointCloud2::ConstPtr &msg)
   // pub_func(pl_surf, pub_corn, msg->header.stamp);
 }
 
+void prin_data_attr(const sensor_msgs::PointCloud2::ConstPtr &msg)
+{
+  sensor_msgs::PointCloud sensor_msgs_pl_orig;
+    sensor_msgs::convertPointCloud2ToPointCloud(*msg, sensor_msgs_pl_orig);
+    //* # Time of sensor data acquisition, coordinate frame ID.
+    // Header header
+      // # sequence ID: consecutively increasing ID 
+      // uint32 seq
+      // #Two-integer timestamp that is expressed as:
+      // # * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+      // # * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+      // # time-handling sugar is provided by the client library
+      // time stamp
+      // #Frame this data is associated with
+      // string frame_id
+    // geometry_msgs/Point32[] points
+      // float32 x
+      // float32 y
+      // float32 z
+    // ChannelFloat32[] channels
+      // string name
+      // float32[] values
+    cout<< "sensor_msgs_pl_orig.header.seq: "<<sensor_msgs_pl_orig.header.seq<<std::endl;
+    cout<< "sensor_msgs_pl_orig.header.stamp.sec: "<<sensor_msgs_pl_orig.header.stamp.sec<<std::endl;
+    cout<< "sensor_msgs_pl_orig.header.stamp.nsec: "<<sensor_msgs_pl_orig.header.stamp.nsec<<std::endl;
+    cout<< "sensor_msgs_pl_orig.header.frame_id: "<<sensor_msgs_pl_orig.header.frame_id<<std::endl;
+    cout<< "sensor_msgs_pl_orig.points.size(): "<<sensor_msgs_pl_orig.points.size()<<std::endl;
+    for(int i=0;i<sensor_msgs_pl_orig.channels.size();i++)
+    {
+      cout<< "sensor_msgs_pl_orig.channels["<<i<<"].name: "<<sensor_msgs_pl_orig.channels[i].name<<std::endl;
+      cout<< "sensor_msgs_pl_orig.channels["<<i<<"].values.size(): "<<sensor_msgs_pl_orig.channels[i].values.size()<<std::endl;
+    }
+    
+    // sensor_msgs_pl_orig.header.seq: 4977
+    // sensor_msgs_pl_orig.header.stamp.sec: 1589933416
+    // sensor_msgs_pl_orig.header.stamp.nsec: 699136000
+    // sensor_msgs_pl_orig.header.frame_id: livox_frame
+    // sensor_msgs_pl_orig.points.size(): 126962
+    // sensor_msgs_pl_orig.channels[0].name: intensity
+    // sensor_msgs_pl_orig.channels[0].values.size(): 126962
+    // sensor_msgs_pl_orig.channels[1].name: timestamp
+    // sensor_msgs_pl_orig.channels[1].values.size(): 126962
+    // sensor_msgs_pl_orig.channels[2].name: ring
+    // sensor_msgs_pl_orig.channels[2].values.size(): 126962
+    // ------
+
+    // Failed to find match for field 'time'.
+    // sensor_msgs_pl_orig.header.seq: 4978
+    // sensor_msgs_pl_orig.header.stamp.sec: 1589933416
+    // sensor_msgs_pl_orig.header.stamp.nsec: 799322000
+    // sensor_msgs_pl_orig.header.frame_id: livox_frame
+    // sensor_msgs_pl_orig.points.size(): 126998
+    // sensor_msgs_pl_orig.channels[0].name: intensity
+    // sensor_msgs_pl_orig.channels[0].values.size(): 126998
+    // sensor_msgs_pl_orig.channels[1].name: timestamp
+    // sensor_msgs_pl_orig.channels[1].values.size(): 126998
+    // sensor_msgs_pl_orig.channels[2].name: ring
+    // sensor_msgs_pl_orig.channels[2].values.size(): 126998
+
+    cout << "------" << endl;
+    for (int i=0; i<sensor_msgs_pl_orig.points.size(); i++) {
+      if(sensor_msgs_pl_orig.points[i].x<1e-5)
+        continue;
+      cout << sensor_msgs_pl_orig.points[i].x << ", " << sensor_msgs_pl_orig.points[i].y << ", " << sensor_msgs_pl_orig.points[i].z 
+      // << endl;
+      <<", intensity: "<< sensor_msgs_pl_orig.channels[0].values[i]
+      <<", timestamp: "<< sensor_msgs_pl_orig.channels[1].values[i]
+      <<", ring: "<< sensor_msgs_pl_orig.channels[2].values[i] << endl;
+    }
+    getchar();
+}
+
 void Preprocess::velodyne_handler(const sensor_msgs::PointCloud2::ConstPtr &msg)
 {
     pl_surf.clear();
     pl_corn.clear();
     pl_full.clear();
+    // prin_data_attr(msg); //* 用于查看雷达数据
+    
 
     pcl::PointCloud<velodyne_ros::Point> pl_orig;
     pcl::fromROSMsg(*msg, pl_orig);
+    // for (int i=0; i<pl_orig.points.size(); i++) {
+    //   if(pl_orig.points[i].x<1e-5)
+    //     continue;
+    // 	cout << pl_orig.points[i].x << ", " << pl_orig.points[i].y << ", " << pl_orig.points[i].z 
+    //       << endl;
+    //        <<", intensity: "<< pl_orig.channels[0].values[i]
+    //        <<", tag: "<< pl_orig.channels[1].values[i]
+    //        <<", line: "<< pl_orig.channels[2].values[i] << endl;
+      
+    // }
+    
     int plsize = pl_orig.points.size();
     if (plsize == 0) return;
     pl_surf.reserve(plsize);

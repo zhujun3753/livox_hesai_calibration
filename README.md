@@ -1,3 +1,74 @@
+# Calibration
+`/hesai/pandar`雷达数据：
+```bash
+sensor_msgs_pl_orig.header.seq: 4977
+sensor_msgs_pl_orig.header.stamp.sec: 1589933416
+sensor_msgs_pl_orig.header.stamp.nsec: 699136000
+sensor_msgs_pl_orig.header.frame_id: livox_frame
+sensor_msgs_pl_orig.points.size(): 126962
+sensor_msgs_pl_orig.channels[0].name: intensity
+sensor_msgs_pl_orig.channels[0].values.size(): 126962
+sensor_msgs_pl_orig.channels[1].name: timestamp
+sensor_msgs_pl_orig.channels[1].values.size(): 126962
+sensor_msgs_pl_orig.channels[2].name: ring
+sensor_msgs_pl_orig.channels[2].values.size(): 126962
+
+sensor_msgs_pl_orig.header.seq: 4978
+sensor_msgs_pl_orig.header.stamp.sec: 1589933416
+sensor_msgs_pl_orig.header.stamp.nsec: 799322000
+sensor_msgs_pl_orig.header.frame_id: livox_frame
+sensor_msgs_pl_orig.points.size(): 126998
+sensor_msgs_pl_orig.channels[0].name: intensity
+sensor_msgs_pl_orig.channels[0].values.size(): 126998
+sensor_msgs_pl_orig.channels[1].name: timestamp
+sensor_msgs_pl_orig.channels[1].values.size(): 126998
+sensor_msgs_pl_orig.channels[2].name: ring
+sensor_msgs_pl_orig.channels[2].values.size(): 126998
+
+#* 数据存放很有规律
+0.0195708, -8.00943, 2.14613, intensity: 90, timestamp: 1.58993e+09, ring: 0
+0.019555, -8.00298, 1.99537, intensity: 96, timestamp: 1.58993e+09, ring: 1
+0.0195324, -7.99371, 1.8455, intensity: 95, timestamp: 1.58993e+09, ring: 2
+0.0195221, -7.98949, 1.69822, intensity: 93, timestamp: 1.58993e+09, ring: 3
+0.0194956, -7.97864, 1.5509, intensity: 95, timestamp: 1.58993e+09, ring: 4
+0.0187598, -7.67754, 1.35376, intensity: 10, timestamp: 1.58993e+09, ring: 5
+0.0187471, -7.67234, 1.21518, intensity: 12, timestamp: 1.58993e+09, ring: 6
+0.0187283, -7.66465, 1.0772, intensity: 11, timestamp: 1.58993e+09, ring: 7
+0.0187035, -7.65449, 0.939856, intensity: 13, timestamp: 1.58993e+09, ring: 8
+0.0186824, -7.64586, 0.803615, intensity: 11, timestamp: 1.58993e+09, ring: 9
+0.0186652, -7.6388, 0.66831, intensity: 11, timestamp: 1.58993e+09, ring: 10
+0.0186421, -7.62935, 0.533498, intensity: 12, timestamp: 1.58993e+09, ring: 11
+0.0186327, -7.62551, 0.399637, intensity: 13, timestamp: 1.58993e+09, ring: 12
+0.0186078, -7.61534, 0.265934, intensity: 12, timestamp: 1.58993e+09, ring: 13
+0.018587, -7.60682, 0.132778, intensity: 13, timestamp: 1.58993e+09, ring: 14
+0.0185508, -7.59198, 0, intensity: 12, timestamp: 1.58993e+09, ring: 15
+0.0185382, -7.58682, -0.132429, intensity: 11, timestamp: 1.58993e+09, ring: 16
+0.0185199, -7.57936, -0.264678, intensity: 13, timestamp: 1.58993e+09, ring: 17
+0.0185058, -7.57358, -0.396916, intensity: 14, timestamp: 1.58993e+09, ring: 18
+0.0184763, -7.56151, -0.528754, intensity: 14, timestamp: 1.58993e+09, ring: 19
+0.0184704, -7.5591, -0.661338, intensity: 12, timestamp: 1.58993e+09, ring: 20
+0.0184491, -7.55039, -0.79358, intensity: 11, timestamp: 1.58993e+09, ring: 21
+0.0184125, -7.53539, -0.925232, intensity: 13, timestamp: 1.58993e+09, ring: 22
+0.0183896, -7.52601, -1.05772, intensity: 12, timestamp: 1.58993e+09, ring: 23
+0.0183803, -7.52221, -1.1914, intensity: 12, timestamp: 1.58993e+09, ring: 24
+0.0183556, -7.51209, -1.32459, intensity: 12, timestamp: 1.58993e+09, ring: 25
+0.0183347, -7.50354, -1.45854, intensity: 10, timestamp: 1.58993e+09, ring: 26
+0.0183175, -7.4965, -1.59344, intensity: 12, timestamp: 1.58993e+09, ring: 27
+0.0182848, -7.48314, -1.72762, intensity: 10, timestamp: 1.58993e+09, ring: 28
+0.0182558, -7.47125, -1.8628, intensity: 14, timestamp: 1.58993e+09, ring: 29
+0.0182396, -7.46465, -2.00015, intensity: 12, timestamp: 1.58993e+09, ring: 30
+0.0182267, -7.45937, -2.13895, intensity: 11, timestamp: 1.58993e+09, ring: 31
+```
+- 频率：10Hz
+- frame_id：livox_frame
+- 3个channels： intensity，timestamp，ring
+- 如何输出见：`Preprocess::velodyne_handler`
+
+
+
+
+
+# Fast-lio
 ## Related Works and Extended Application
 
 **SLAM:**
